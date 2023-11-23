@@ -34,5 +34,5 @@ public class DictionaryManagement {
             System.out.println(words[i].getWord_target() + " : " + words[i].getWord_explain());
         }
     }
-    //adu
+
 }
