@@ -1,10 +1,9 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
 public class DictionaryCommandLine {
-    private List<Word> dictionary = new ArrayList<>();
 
     public void displayMenu() {
         System.out.println("Welcome to My Application!");
@@ -20,20 +19,49 @@ public class DictionaryCommandLine {
         System.out.println("[9] Export to file");
     }
 
-    public void dictionaryAdvanced() {
-        Scanner scanner = new Scanner(System.in);
+    public void showAllWords() {
+        System.out.println("No| English    | Vietnamese");
+        System.out.println("----------------------------");
 
+        for (int i = 0; i < (Dictionary.words).size(); i++) {
+            Word word = Dictionary.words.get(i);
+            System.out.printf("%d | %-10s | %-10s%n", i + 1, word.getWord_target(), word.getWord_explain());
+        }
+    }
+
+    public void insertFromCommandLine() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số từ: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
+
+        for(int i = 0 ; i < n ; i++) {
+            System.out.print("Enter English word: ");
+            String englishWord = scanner.nextLine();
+
+            System.out.print("Enter Vietnamese meaning: ");
+            String vietnameseMeaning = scanner.nextLine();
+
+            Word newWord = new Word(englishWord, vietnameseMeaning);
+            Dictionary.words.add(newWord);
+
+        }
+        System.out.println("Word added successfully!");
+    }
+
+    public void dictionaryBasic() {
         while (true) {
             displayMenu();
             System.out.print("Your action: ");
-            String input = scanner.nextLine();
+            Scanner scanner = new Scanner(System.in);
+            String userInput = scanner.nextLine();
 
-            switch (input) {
+            switch (userInput) {
                 case "0":
                     System.out.println("Exiting the application. Goodbye!");
                     return;
                 case "1":
-                    // Implement the Add function
+                    insertFromCommandLine();
                     break;
                 case "2":
                     // Implement the Remove function
@@ -42,7 +70,7 @@ public class DictionaryCommandLine {
                     // Implement the Update function
                     break;
                 case "4":
-                    // Implement the Display function
+                    showAllWords();
                     break;
                 case "5":
                     // Implement the Lookup function
@@ -64,8 +92,9 @@ public class DictionaryCommandLine {
             }
         }
     }
+
     public static void main(String[] args) {
         DictionaryCommandLine dictionaryApp = new DictionaryCommandLine();
-        dictionaryApp.dictionaryAdvanced();
+        dictionaryApp.dictionaryBasic();
     }
 }

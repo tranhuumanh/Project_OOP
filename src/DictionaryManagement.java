@@ -10,14 +10,14 @@ public class DictionaryManagement {
         System.out.println("Nhập số lượng từ vựng:");
         int n = sc.nextInt(); // đọc số lượng từ vựng
         sc.nextLine(); // đọc bỏ dòng trống
-        size = n; // Initialize size with the number of words
+        size = n;
         for (int i = 0; i < n; i++) {
             System.out.println("Nhập từ tiếng Anh:");
             String word_target = sc.nextLine(); // đọc từ tiếng Anh
-            System.out.println("Nhập giải thích bằng tiếng Việt:");
+            System.out.println("Nhập nghĩa bằng tiếng Việt:");
             String word_explain = sc.nextLine(); // đọc giải thích tiếng Việt
             Word worded = new Word(word_target, word_explain); // tạo đối tượng Word và thêm vào mảng
-            Dictionary.words.add(worded);
+            (Dictionary.words).add(worded);
         }
         sc.close(); // đóng đối tượng Scanner
     }
