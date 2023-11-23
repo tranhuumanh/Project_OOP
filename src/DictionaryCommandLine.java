@@ -67,13 +67,13 @@ public class DictionaryCommandLine {
                     removeCommandLine();
                     break;
                 case "3":
-                    // Implement the Update function
+                    UpdateCommandLine();
                     break;
                 case "4":
                     showAllWords();
                     break;
                 case "5":
-                    LookUp();
+                    LookUpCommandLine();
                     break;
                 case "6":
                     Search();
@@ -94,7 +94,7 @@ public class DictionaryCommandLine {
     }
 
 
-    public void LookUp() { //Hàm tìm kiếm các từ tiếng Anh
+    public void LookUpCommandLine() { //Hàm tìm kiếm các từ tiếng Anh
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập từ cần tìm: ");
         String worded = sc.nextLine();
@@ -132,18 +132,48 @@ public class DictionaryCommandLine {
         }
 
     }
-    public void removeCommandLine() {
+    public void removeCommandLine() { // Xóa từ khỏi từ điển
         Scanner sc = new Scanner(System.in);
         String worded = sc.nextLine();
         for (Word word : Dictionary.words) {
             if ((word.getWord_target()).equals(worded)) {
                 Dictionary.words.remove(word);
                 System.out.println("Xóa thành công");
-                break;
+                return;
             }
 
         }
         System.out.println("Không tìm thấy từ cần xóa");
+    }
+
+    public void UpdateCommandLine() { // Sửa từ
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Điền từ cần sửa: ");
+        String update = sc.nextLine();
+        sc.nextLine();
+
+        for (Word word : Dictionary.words) {
+
+            if ((word.getWord_target()).equals(update)) {
+
+                System.out.println("[1] Sửa từ tiếng Anh");
+                System.out.println("[2] Sửa nghĩa của từ tiếng Anh");
+                System.out.print("Nhâp lựa chọn của bạn: ");
+
+                int n = sc.nextInt();
+
+                if (n == 1) {
+                    System.out.print("Nhập từ tiếng Anh thay thế: ");
+                    String re = sc.nextLine();
+                    word.setWord_target(re);
+                }
+
+                else if ( n == 2 ) {
+
+                }
+            }
+        }
     }
 
 
