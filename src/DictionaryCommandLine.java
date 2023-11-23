@@ -151,7 +151,6 @@ public class DictionaryCommandLine {
         Scanner sc = new Scanner(System.in);
         System.out.print("Điền từ cần sửa: ");
         String update = sc.nextLine();
-        sc.nextLine();
 
         for (Word word : Dictionary.words) {
 
@@ -162,6 +161,7 @@ public class DictionaryCommandLine {
                 System.out.print("Nhâp lựa chọn của bạn: ");
 
                 int n = sc.nextInt();
+                sc.nextLine();
 
                 if (n == 1) {
                     System.out.print("Nhập từ tiếng Anh thay thế: ");
