@@ -76,7 +76,7 @@ public class DictionaryCommandLine {
                     LookUp();
                     break;
                 case "6":
-                    //
+                    Search();
                     break;
                 case "7":
                     // Implement the Game function
@@ -94,7 +94,7 @@ public class DictionaryCommandLine {
     }
 
 
-    public void LookUp() {
+    public void LookUp() { //Hàm tìm kiếm các từ tiếng Anh
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập từ cần tìm: ");
         String worded = sc.nextLine();
@@ -109,6 +109,27 @@ public class DictionaryCommandLine {
             }
         }
         System.out.println("Không tìm thấy từ cần tìm");
+
+    }
+
+    public void Search() { //Hàm tìm kiếm các từ tiếng Anh có tiền tố là
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập các tiền tố cần tìm: ");
+        String worded = sc.nextLine();
+
+        System.out.println("No| English    | Vietnamese");
+        System.out.println("----------------------------");
+
+        int i = 1;
+        for(Word word : Dictionary.words) {
+            if (word.getWord_target().startsWith(worded)) {
+                System.out.printf("%d | %-10s | %-10s%n", i , word.getWord_target(), word.getWord_explain());
+                i++;
+            }
+        }
+        if (i == 1) {
+            System.out.println("Không tìm thấy từ nào có tiền tố này");
+        }
 
     }
     public void removeCommandLine() {
