@@ -76,7 +76,7 @@ public class DictionaryCommandLine {
                     LookUpCommandLine();
                     break;
                 case "6":
-                    Search();
+                    SearchCommandLine();
                     break;
                 case "7":
                     // Implement the Game function
@@ -112,7 +112,7 @@ public class DictionaryCommandLine {
 
     }
 
-    public void Search() { //Hàm tìm kiếm các từ tiếng Anh có tiền tố là
+    public void SearchCommandLine() { //Hàm tìm kiếm các từ tiếng Anh có tiền tố là
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập các tiền tố cần tìm: ");
         String worded = sc.nextLine();
@@ -167,10 +167,19 @@ public class DictionaryCommandLine {
                     System.out.print("Nhập từ tiếng Anh thay thế: ");
                     String re = sc.nextLine();
                     word.setWord_target(re);
+                    return;
                 }
 
                 else if ( n == 2 ) {
+                    System.out.print("Nhập nghĩa của từ tiếng Anh cần sửa: ");
+                    String re = sc.nextLine();
+                    word.setWord_explain(re);
+                    return;
+                }
 
+                else {
+                    System.out.println("Lựa chọn không hợp lệ!");
+                    return;
                 }
             }
         }
