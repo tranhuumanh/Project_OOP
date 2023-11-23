@@ -36,10 +36,10 @@ public class DictionaryCommandLine {
         scanner.nextLine();
 
         for(int i = 0 ; i < n ; i++) {
-            System.out.print("Enter English word: ");
+            System.out.print("Điền từ tiếng Anh: ");
             String englishWord = scanner.nextLine();
 
-            System.out.print("Enter Vietnamese meaning: ");
+            System.out.print("Điền nghĩa tiếng Việt: ");
             String vietnameseMeaning = scanner.nextLine();
 
             Word newWord = new Word(englishWord, vietnameseMeaning);
@@ -64,7 +64,7 @@ public class DictionaryCommandLine {
                     insertFromCommandLine();
                     break;
                 case "2":
-                    // Implement the Remove function
+                    removeCommandLine();
                     break;
                 case "3":
                     // Implement the Update function
@@ -73,10 +73,10 @@ public class DictionaryCommandLine {
                     showAllWords();
                     break;
                 case "5":
-                    // Implement the Lookup function
+                    LookUp();
                     break;
                 case "6":
-                    // Implement the Search function
+                    //
                     break;
                 case "7":
                     // Implement the Game function
@@ -92,6 +92,40 @@ public class DictionaryCommandLine {
             }
         }
     }
+
+
+    public void LookUp() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập từ cần tìm: ");
+        String worded = sc.nextLine();
+        for (Word word : Dictionary.words) {
+            if((word.getWord_target()).equals(worded)) {
+
+                System.out.println(" English    | Vietnamese");
+                System.out.println("----------------------------");
+
+                System.out.printf(" %-10s | %-10s%n", word.getWord_target(), word.getWord_explain());
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy từ cần tìm");
+
+    }
+    public void removeCommandLine() {
+        Scanner sc = new Scanner(System.in);
+        String worded = sc.nextLine();
+        for (Word word : Dictionary.words) {
+            if ((word.getWord_target()).equals(worded)) {
+                Dictionary.words.remove(word);
+                System.out.println("Xóa thành công");
+                break;
+            }
+
+        }
+        System.out.println("Không tìm thấy từ cần xóa");
+    }
+
+
 
     public static void main(String[] args) {
         DictionaryCommandLine dictionaryApp = new DictionaryCommandLine();
