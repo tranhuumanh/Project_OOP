@@ -7,26 +7,29 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+
 public class NoiTuGame {
-     public static void playGame(List<String> words) {
+    public static void playGame(List<String> words) {
         Set<String> usedWords = new HashSet<>();
-        Set<String> usedPlayerWords = new HashSet<>(); // Thêm tập hợp mới cho từ đã sử dụng bởi người chơi
+        Set<String> usedPlayerWords = new HashSet<>();
 
+        // Thêm biến để theo dõi từ hiện tại
         String currentWord = getRandomWord(words);
-        usedWords.add(currentWord);
 
-        boolean gameOver = false; // Biến để kiểm tra trạng thái trò chơi
+        boolean gameOver = false;
 
         while (!gameOver) {
             System.out.println("Từ hiện tại: " + currentWord);
 
             String playerWord = getPlayerInput(currentWord, usedWords, usedPlayerWords, words);
             usedWords.add(playerWord);
-            usedPlayerWords.add(playerWord); // Thêm từ đã sử dụng bởi người chơi vào tập hợp
+            usedPlayerWords.add(playerWord);
+
+            // Cập nhật từ hiện tại sau mỗi lượt người chơi nhập
+            currentWord = playerWord;
 
             if (isEndWord(playerWord, words)) {
                 System.out.println("Từ bạn nhập không có trong danh sách từ. Bạn thua!");
-                // Khi người chơi thua, đặt trạng thái trò chơi thành kết thúc
                 gameOver = true;
                 break;
             }
@@ -46,7 +49,9 @@ public class NoiTuGame {
         }
     }
 
-     public static List<String> readWordList(String filePath) {
+    // Các phương thức khác giữ nguyên
+
+    public static List<String> readWordList(String filePath) {
         List<String> words = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
