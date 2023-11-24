@@ -7,26 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
-
 public class NoiTuGame {
-
-    public static void main(String[] args) {
-        // Cập nhật đường dẫn tới tệp từ vựng của bạn
-        String filePath = "src/TestGame.txt";
-
-        // Đọc danh sách từ vựng từ tệp
-        List<String> words = readWordList(filePath);
-
-        // Kiểm tra nếu đọc thành công
-        if (words != null) {
-            // Bắt đầu trò chơi
-            playGame(words);
-        } else {
-            System.out.println("Không thể đọc danh sách từ.");
-        }
-    }
-
-    private static void playGame(List<String> words) {
+     public static void playGame(List<String> words) {
         Set<String> usedWords = new HashSet<>();
         Set<String> usedPlayerWords = new HashSet<>(); // Thêm tập hợp mới cho từ đã sử dụng bởi người chơi
 
@@ -64,7 +46,7 @@ public class NoiTuGame {
         }
     }
 
-    private static List<String> readWordList(String filePath) {
+     public static List<String> readWordList(String filePath) {
         List<String> words = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
