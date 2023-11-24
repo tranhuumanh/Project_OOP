@@ -6,7 +6,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Scanner;
 
-public class TranslateAPIGG {
+public class GoogleTranslateAPI {
 
     public static String googleTranslate(String langFrom, String langTo, String text) throws IOException {
         String urlScript = "https://script.google.com/macros/s/AKfycbw1qSfs1Hvfnoi3FzGuoDWijwQW69eGcMM_iGDF7p5vu1oN_CaFqIDFmCGzBuuGCk_N/exec" +

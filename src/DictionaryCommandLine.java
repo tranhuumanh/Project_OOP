@@ -1,7 +1,7 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -92,6 +92,8 @@ public class DictionaryCommandLine {
                     break;
                 case "10":
                     HistoryCommandLine();
+                case "11":
+
                 default:
                     System.out.println("Không khả dụng yêu cầu nhập lại!");
             }
@@ -263,4 +265,6 @@ public class DictionaryCommandLine {
         //Đang build dở :))
 
     }
+    
+
 }
