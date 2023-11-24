@@ -272,7 +272,7 @@ public class DictionaryCommandLine {
 
     public void GameCommandLine() {
         // Cập nhật đường dẫn tới tệp từ vựng của bạn
-        String filePath = "TestGame.txt";
+        String filePath = "100000Wordsforgame.txt";
 
         // Đọc danh sách từ vựng từ tệp
         List<String> words = NoiTuGame.readWordList(filePath);
