@@ -1,10 +1,8 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
-
-
 public class DictionaryCommandLine {
 
     public void displayMenu() {
@@ -19,6 +17,7 @@ public class DictionaryCommandLine {
         System.out.println("[7] Game");
         System.out.println("[8] Import from file");
         System.out.println("[9] Export to file");
+        System.out.println("[10] Search History");
     }
 
     public void showAllWords() {
@@ -81,7 +80,7 @@ public class DictionaryCommandLine {
                     SearchCommandLine();
                     break;
                 case "7":
-                    // Implement the Game function
+                    GameCommandLine();
                     break;
                 case "8":
                     ImportToFileCommandLine();
@@ -89,6 +88,10 @@ public class DictionaryCommandLine {
                 case "9":
                     ExportToFileCommandLine();
                     break;
+                case "10":
+                    HistoryCommandLine();
+                case "11":
+
                 default:
                     System.out.println("Không khả dụng yêu cầu nhập lại!");
             }
@@ -102,6 +105,8 @@ public class DictionaryCommandLine {
         String worded = sc.nextLine();
         for (Word word : Dictionary.words) {
             if ((word.getWord_target()).equals(worded)) {
+
+                (Dictionary.SaveHistoryWord).add(word.getWord_target()); //Lưu lại lịch sử tìm kiếm
 
                 System.out.println(" English    | Vietnamese");
                 System.out.println("----------------------------");
@@ -125,6 +130,9 @@ public class DictionaryCommandLine {
         int i = 1;
         for (Word word : Dictionary.words) {
             if (word.getWord_target().startsWith(worded)) {
+
+                (Dictionary.SaveHistoryWord).add(word.getWord_target()); //Lưu lại lịch sử tìm kiếm
+
                 System.out.printf("%d | %-10s | %-10s%n", i, word.getWord_target(), word.getWord_explain());
                 i++;
             }
@@ -205,7 +213,7 @@ public class DictionaryCommandLine {
 
             // Ghi từng phần tử của ArrayList vào file, mỗi phần tử trên một dòng
             for (Word word : Dictionary.words) {
-                bufferedWriter.write(word.getWord_target() + ": " + word.getWord_explain());
+                bufferedWriter.write(word.getWord_target() + " " + word.getWord_explain());
                 bufferedWriter.newLine(); // Thêm dòng mới sau mỗi đối tượng
             }
 
@@ -221,37 +229,41 @@ public class DictionaryCommandLine {
         }
     }
 
-    public void ImportToFileCommandLine() {
-        try {
-            File file = new File("Dictionary.txt");
-            FileReader fileReader = new FileReader(file);
-
-            // Tạo đối tượng BufferedReader để đọc dữ liệu hiệu quả hơn
-            BufferedReader output = new BufferedReader(fileReader);
-
-            // Đọc từng dòng từ file và in ra màn hình
-            for(Word word : Dictionary.words) {
-
-            }
-
-
-            // Đóng luồng đọc
-            output.close();
-            fileReader.close();
-
-        } catch (IOException check) {
-            System.out.println("LỖI HÀM IMPORT TO FILE");
+    public void HistoryCommandLine() {
+        if (Dictionary.SaveHistoryWord.isEmpty()) {
+            System.out.println("Không có từ nào tìm kiếm gần đây");
+            return;
         }
+        System.out.println("Tìm kiếm gần đây");
+        int n = Dictionary.SaveHistoryWord.size();
+        int no = 1;
+        for(int i = n-1 ; i >= 0 ; i--) {
+            System.out.println(Dictionary.SaveHistoryWord.get(i));
+            no++;
+        }
+        System.out.println("Số kết quả đã tìm kiếm là:" + no);
     }
-
-
-    }
-
-
-
-
     public static void main(String[] args) {
         DictionaryCommandLine dictionaryApp = new DictionaryCommandLine();
         dictionaryApp.dictionaryBasic();
     }
+
+    public void ImportToFileCommandLine() {
+        for (Word word : Dictionary.words) {
+
+
+            //Đang build dở :))
+
+        }
+
+    }
+
+    public void GameCommandLine() {
+
+        //Đang build dở :))
+
+    }
+
+
+
 }
