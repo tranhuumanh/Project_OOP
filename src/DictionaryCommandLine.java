@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 public class DictionaryCommandLine {
 
@@ -270,9 +271,19 @@ public class DictionaryCommandLine {
     }
 
     public void GameCommandLine() {
+        // Cập nhật đường dẫn tới tệp từ vựng của bạn
+        String filePath = "src/TestGame.txt";
 
-        //Đang build dở :))
+        // Đọc danh sách từ vựng từ tệp
+        List<String> words = NoiTuGame.readWordList(filePath);
 
+        // Kiểm tra nếu đọc thành công
+        if (words != null) {
+            // Bắt đầu trò chơi
+            NoiTuGame.playGame(words);
+        } else {
+            System.out.println("Không thể đọc danh sách từ.");
+        }
     }
 
 
