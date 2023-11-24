@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class DictionaryCommandLine {
 
@@ -85,7 +89,7 @@ public class DictionaryCommandLine {
                     // Implement the Import function
                     break;
                 case "9":
-                    // Implement the Export function
+                    ExportToFileCommandLine();
                     break;
                 default:
                     System.out.println("Action not supported. Please enter a valid option.");
@@ -183,6 +187,38 @@ public class DictionaryCommandLine {
                 }
             }
         }
+    }
+
+    public void ExportToFileCommandLine() throws IOException {
+        if ((Dictionary.words).isEmpty()) {
+            System.out.println("Không có dữ liệu để Export!");
+            return;
+        }
+
+        File file = new File("Dictionary.txt");
+        // Kiểm tra nếu file không tồn tại thì in ra thông báo
+        if (!file.exists()) {
+            System.out.println("File không tồn tại!");
+        }
+
+        // Tạo đối tượng FileWriter
+        FileWriter input = new FileWriter(file);
+
+        // Tạo đối tượng BufferedWriter để ghi dữ liệu hiệu quả hơn
+        BufferedWriter bufferedWriter = new BufferedWriter(input);
+
+        // Ghi từng phần tử của ArrayList vào file, mỗi phần tử trên một dòng
+        for (Word word : Dictionary.words) {
+            bufferedWriter.write(word.getWord_target() + ": " + word.getWord_explain());
+            bufferedWriter.newLine(); // Thêm dòng mới sau mỗi đối tượng
+        }
+
+        // Đóng các luồng
+        bufferedWriter.close();
+        input.close();
+
+        System.out.println("ArrayList đã được ghi vào file thành công.");
+
     }
 
 
