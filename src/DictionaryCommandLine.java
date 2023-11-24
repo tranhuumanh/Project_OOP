@@ -39,7 +39,7 @@ public class DictionaryCommandLine {
         int n = scanner.nextInt();
         scanner.nextLine();
 
-        for(int i = 0 ; i < n ; i++) {
+        for (int i = 0; i < n; i++) {
             System.out.print("Điền từ tiếng Anh: ");
             String englishWord = scanner.nextLine();
 
@@ -103,7 +103,7 @@ public class DictionaryCommandLine {
         System.out.println("Nhập từ cần tìm: ");
         String worded = sc.nextLine();
         for (Word word : Dictionary.words) {
-            if((word.getWord_target()).equals(worded)) {
+            if ((word.getWord_target()).equals(worded)) {
 
                 System.out.println(" English    | Vietnamese");
                 System.out.println("----------------------------");
@@ -125,9 +125,9 @@ public class DictionaryCommandLine {
         System.out.println("----------------------------");
 
         int i = 1;
-        for(Word word : Dictionary.words) {
+        for (Word word : Dictionary.words) {
             if (word.getWord_target().startsWith(worded)) {
-                System.out.printf("%d | %-10s | %-10s%n", i , word.getWord_target(), word.getWord_explain());
+                System.out.printf("%d | %-10s | %-10s%n", i, word.getWord_target(), word.getWord_explain());
                 i++;
             }
         }
@@ -136,6 +136,7 @@ public class DictionaryCommandLine {
         }
 
     }
+
     public void removeCommandLine() { // Xóa từ khỏi từ điển
         Scanner sc = new Scanner(System.in);
         String worded = sc.nextLine();
@@ -172,16 +173,12 @@ public class DictionaryCommandLine {
                     String re = sc.nextLine();
                     word.setWord_target(re);
                     return;
-                }
-
-                else if ( n == 2 ) {
+                } else if (n == 2) {
                     System.out.print("Nhập nghĩa của từ tiếng Anh cần sửa: ");
                     String re = sc.nextLine();
                     word.setWord_explain(re);
                     return;
-                }
-
-                else {
+                } else {
                     System.out.println("Lựa chọn không hợp lệ!");
                     return;
                 }
@@ -189,37 +186,44 @@ public class DictionaryCommandLine {
         }
     }
 
-    public void ExportToFileCommandLine() throws IOException {
-        if ((Dictionary.words).isEmpty()) {
-            System.out.println("Không có dữ liệu để Export!");
-            return;
+    public void ExportToFileCommandLine() {
+        try {
+            if ((Dictionary.words).isEmpty()) {
+                System.out.println("Không có dữ liệu để Export!");
+                return;
+            }
+
+            File file = new File("Dictionary.txt");
+            // Kiểm tra nếu file không tồn tại thì in ra thông báo
+            if (!file.exists()) {
+                System.out.println("File không tồn tại!");
+            }
+
+            // Tạo đối tượng FileWriter
+            FileWriter input = new FileWriter(file);
+
+            // Tạo đối tượng BufferedWriter để ghi dữ liệu hiệu quả hơn
+            BufferedWriter bufferedWriter = new BufferedWriter(input);
+
+            // Ghi từng phần tử của ArrayList vào file, mỗi phần tử trên một dòng
+            for (Word word : Dictionary.words) {
+                bufferedWriter.write(word.getWord_target() + ": " + word.getWord_explain());
+                bufferedWriter.newLine(); // Thêm dòng mới sau mỗi đối tượng
+            }
+
+            // Đóng các luồng
+            bufferedWriter.close();
+            input.close();
+
+            System.out.println("ArrayList đã được ghi vào file thành công.");
+
         }
-
-        File file = new File("Dictionary.txt");
-        // Kiểm tra nếu file không tồn tại thì in ra thông báo
-        if (!file.exists()) {
-            System.out.println("File không tồn tại!");
+        catch(IOException check) {
+            System.out.println("LỖI HÀM EXPORT TO FILE");
         }
-
-        // Tạo đối tượng FileWriter
-        FileWriter input = new FileWriter(file);
-
-        // Tạo đối tượng BufferedWriter để ghi dữ liệu hiệu quả hơn
-        BufferedWriter bufferedWriter = new BufferedWriter(input);
-
-        // Ghi từng phần tử của ArrayList vào file, mỗi phần tử trên một dòng
-        for (Word word : Dictionary.words) {
-            bufferedWriter.write(word.getWord_target() + ": " + word.getWord_explain());
-            bufferedWriter.newLine(); // Thêm dòng mới sau mỗi đối tượng
-        }
-
-        // Đóng các luồng
-        bufferedWriter.close();
-        input.close();
-
-        System.out.println("ArrayList đã được ghi vào file thành công.");
 
     }
+
 
 
 
