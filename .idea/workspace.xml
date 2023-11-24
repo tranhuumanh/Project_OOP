@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d905d8e2-f44c-413e-a57e-8f77cc38fd72" name="Changes" comment="Translate">
+    <list default="true" id="d905d8e2-f44c-413e-a57e-8f77cc38fd72" name="Changes" comment="aaa">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dictionary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DictionaryCommandLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DictionaryCommandLine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,17 +53,11 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/seina/IdeaProjects/DictionaryByGaru/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/seina/IdeaProjects/DictionaryByGaru/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -77,9 +73,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1700729372928</updated>
-      <workItem from="1700819009181" duration="176000" />
-      <workItem from="1700819360401" duration="1060000" />
-      <workItem from="1700820630979" duration="69000" />
     </task>
     <task id="LOCAL-00001" summary="aaa">
       <option name="closed" value="true" />
@@ -185,43 +178,8 @@
       <option name="project" value="LOCAL" />
       <updated>1700788325932</updated>
     </task>
-    <task id="LOCAL-00014" summary="aaa">
-      <option name="closed" value="true" />
-      <created>1700819100049</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1700819100049</updated>
-    </task>
-    <task id="LOCAL-00015" summary="aaa">
-      <option name="closed" value="true" />
-      <created>1700819628470</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1700819628470</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Translate">
-      <option name="closed" value="true" />
-      <created>1700820678052</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1700820678052</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Translate">
-      <option name="closed" value="true" />
-      <created>1700820683116</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1700820683116</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="14" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -236,8 +194,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="aaa" />
-    <MESSAGE value="Translate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Translate" />
+    <option name="LAST_COMMIT_MESSAGE" value="aaa" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
