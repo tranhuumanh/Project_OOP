@@ -27,7 +27,7 @@ public class TranslateAPIGG {
     }
 
     public static void main(String[] args) throws IOException {
-        String text = "hello";
+        String text = "Nice";
         System.out.println("Translated text: \n" + googleTranslate("", "vi", text));
     }
 
