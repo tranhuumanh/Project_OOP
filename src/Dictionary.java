@@ -6,4 +6,6 @@ public class Dictionary {
     public ArrayList<Word> getWords() {
         return words;
     }
+
+    public ArrayList<>
 }

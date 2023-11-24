@@ -1,11 +1,9 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+
 
 public class DictionaryCommandLine {
 
@@ -86,13 +84,13 @@ public class DictionaryCommandLine {
                     // Implement the Game function
                     break;
                 case "8":
-                    // Implement the Import function
+                    ImportToFileCommandLine();
                     break;
                 case "9":
                     ExportToFileCommandLine();
                     break;
                 default:
-                    System.out.println("Action not supported. Please enter a valid option.");
+                    System.out.println("Không khả dụng yêu cầu nhập lại!");
             }
         }
     }
@@ -186,7 +184,7 @@ public class DictionaryCommandLine {
         }
     }
 
-    public void ExportToFileCommandLine() {
+    public void ExportToFileCommandLine() { // Hàm nhập ArrayList words vào file Dictionary.txt
         try {
             if ((Dictionary.words).isEmpty()) {
                 System.out.println("Không có dữ liệu để Export!");
@@ -215,12 +213,37 @@ public class DictionaryCommandLine {
             bufferedWriter.close();
             input.close();
 
-            System.out.println("ArrayList đã được ghi vào file thành công.");
+            System.out.println("Đã ghi vào file thành công.");
 
         }
         catch(IOException check) {
             System.out.println("LỖI HÀM EXPORT TO FILE");
         }
+    }
+
+    public void ImportToFileCommandLine() {
+        try {
+            File file = new File("Dictionary.txt");
+            FileReader fileReader = new FileReader(file);
+
+            // Tạo đối tượng BufferedReader để đọc dữ liệu hiệu quả hơn
+            BufferedReader output = new BufferedReader(fileReader);
+
+            // Đọc từng dòng từ file và in ra màn hình
+            for(Word word : Dictionary.words) {
+
+            }
+
+
+            // Đóng luồng đọc
+            output.close();
+            fileReader.close();
+
+        } catch (IOException check) {
+            System.out.println("LỖI HÀM IMPORT TO FILE");
+        }
+    }
+
 
     }
 
