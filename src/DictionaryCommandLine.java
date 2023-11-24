@@ -18,6 +18,7 @@ public class DictionaryCommandLine {
         System.out.println("[8] Import from file");
         System.out.println("[9] Export to file");
         System.out.println("[10] Search History");
+        System.out.println("[11] Sound");
     }
 
     public void showAllWords() {
@@ -91,6 +92,7 @@ public class DictionaryCommandLine {
                 case "10":
                     HistoryCommandLine();
                 case "11":
+                    SoundCommandLine();
 
                 default:
                     System.out.println("Không khả dụng yêu cầu nhập lại!");
@@ -248,6 +250,15 @@ public class DictionaryCommandLine {
         dictionaryApp.dictionaryBasic();
     }
 
+    public void SoundCommandLine() {
+
+        System.out.print("Nhập từ tiếng Anh muốn nghe phát âm: ");
+        Scanner sc = new Scanner(System.in);
+        String worded = sc.nextLine();
+        Sound.Vocal(worded);
+        return;
+    }
+
     public void ImportToFileCommandLine() {
         for (Word word : Dictionary.words) {
 
@@ -263,6 +274,9 @@ public class DictionaryCommandLine {
         //Đang build dở :))
 
     }
+
+
+
 
 
 
