@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-public class DictionaryCommandLine extends Dictionary {
+public class DictionaryCommandLine {
 
     public void displayMenu() {
         System.out.println("Welcome to My Application!");
@@ -20,7 +20,6 @@ public class DictionaryCommandLine extends Dictionary {
         System.out.println("[9] Export to file");
         System.out.println("[10] Search History");
         System.out.println("[11] Sound");
-        System.out.println("[12] Google Translate");
     }
 
     public void showAllWords() {
@@ -95,14 +94,6 @@ public class DictionaryCommandLine extends Dictionary {
                     HistoryCommandLine();
                 case "11":
                     SoundCommandLine();
-                case "12":
-                    try{
-                        Translate();
-                    }
-                    catch (IOException e){
-                    }
-                    break;
-
 
                 default:
                     System.out.println("Không khả dụng yêu cầu nhập lại!");
@@ -281,7 +272,7 @@ public class DictionaryCommandLine extends Dictionary {
 
     public void GameCommandLine() {
         // Cập nhật đường dẫn tới tệp từ vựng của bạn
-        String filePath = "100000Wordsforgame.txt";
+        String filePath = "src/TestGame.txt";
 
         // Đọc danh sách từ vựng từ tệp
         List<String> words = NoiTuGame.readWordList(filePath);
@@ -290,33 +281,14 @@ public class DictionaryCommandLine extends Dictionary {
         if (words != null) {
             // Bắt đầu trò chơi
             NoiTuGame.playGame(words);
-        }
-        else {
+        } else {
             System.out.println("Không thể đọc danh sách từ.");
         }
     }
-    public static void Translate() throws IOException {
-        System.out.println("[1] ENG --> VIE");
-        System.out.println("[2] VIE --> ENG");
 
-        Scanner scanner = new Scanner(System.in);
-        int choiceTranslate = scanner.nextInt();
-        scanner.nextLine();  // Đọc newline character sau khi đọc số
 
-        if (choiceTranslate == 1) {
-            System.out.println("ENG --> VIE");
-            System.out.print("Nhập văn bản tiếng Anh: ");
-            String text = scanner.nextLine();
-            String translatedText = GoogleTranslateAPI.googleTranslate("en", "vi", text);
-            System.out.println("Nghĩa: " + translatedText);
-        } else if (choiceTranslate == 2) {
-            System.out.println("VIE --> ENG");
-            System.out.print("Nhập văn bản tiếng Việt: ");
-            String text = scanner.nextLine();
-            String translatedText = GoogleTranslateAPI.googleTranslate("vi", "en", text);
-            System.out.println("Translation: " + translatedText);
-        } else {
-            System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn 1 hoặc 2.");
-        }
-    }
+
+
+
+
 }
