@@ -1,10 +1,7 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
-public class DictionaryCommandLine {
+public class DictionaryCommandLine extends Dictionary {
 
     public void displayMenu() {
         System.out.println("Welcome to My Application!");
@@ -20,6 +17,7 @@ public class DictionaryCommandLine {
         System.out.println("[9] Export to file");
         System.out.println("[10] Search History");
         System.out.println("[11] Sound");
+        System.out.println("[12] Google Translate");
     }
 
     public void showAllWords() {
@@ -85,7 +83,7 @@ public class DictionaryCommandLine {
                     GameCommandLine();
                     break;
                 case "8":
-                    ImportToFileCommandLine();
+                    importFromFileCommandLine();
                     break;
                 case "9":
                     ExportToFileCommandLine();
@@ -94,6 +92,14 @@ public class DictionaryCommandLine {
                     HistoryCommandLine();
                 case "11":
                     SoundCommandLine();
+                case "12":
+                    try{
+                        Translate();
+                    }
+                    catch (IOException e){
+                    }
+                    break;
+
 
                 default:
                     System.out.println("Không khả dụng yêu cầu nhập lại!");
@@ -260,35 +266,92 @@ public class DictionaryCommandLine {
         return;
     }
 
-    public void ImportToFileCommandLine() {
-        for (Word word : Dictionary.words) {
+    public static void importFromFileCommandLine() {
+        try {
+            File file = new File("Dictionary.txt");
 
+            if (!file.exists()) {
+                System.out.println("File không tồn tại!");
+                return;
+            }
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] parts = line.trim().split("\\s+", 2);
 
-            //Đang build dở :))
+                if (parts.length == 2) {
+                    String wordTarget = parts[0];
+                    String wordExplain = parts[1];
+                    Dictionary.words.add(new Word(wordTarget, wordExplain));
+                } else {
+                    System.out.println("Lỗi ở từ: " + line);
+                }
+            }
 
+            // Đóng các luồng
+            bufferedReader.close();
+            fileReader.close();
+
+            System.out.println("Đã đọc từ file thành công.");
+
+        } catch (IOException e) {
+            System.out.println("LỖI HÀM IMPORT FROM FILE");
         }
-
     }
 
     public void GameCommandLine() {
-        // Cập nhật đường dẫn tới tệp từ vựng của bạn
-        String filePath = "src/TestGame.txt";
+        System.out.println("[1] Nối Từ");
+        System.out.println("[2] Đố Vui");
+        Scanner scanner = new Scanner(System.in);
+        int choiceGame = scanner.nextInt();
+        scanner.nextLine();
 
-        // Đọc danh sách từ vựng từ tệp
-        List<String> words = NoiTuGame.readWordList(filePath);
+        if(choiceGame == 1){
+            String filePath = "100000Wordsforgame.txt";
 
-        // Kiểm tra nếu đọc thành công
-        if (words != null) {
-            // Bắt đầu trò chơi
-            NoiTuGame.playGame(words);
+            // Đọc danh sách từ vựng từ tệp
+            List<String> words = NoiTuGame.readWordList(filePath);
+
+            // Kiểm tra nếu đọc thành công
+            if (words != null) {
+                // Bắt đầu trò chơi
+                NoiTuGame.playGame(words);
+            }
+            else {
+                System.out.println("Không thể đọc danh sách từ.");
+            }
+
+        }
+        else if (choiceGame == 2){
+            System.out.println("Đố Vui");
+            DoVuiGame.choiGame();
+
+        }
+
+    }
+    public static void Translate() throws IOException {
+        System.out.println("[1] ENG --> VIE");
+        System.out.println("[2] VIE --> ENG");
+
+        Scanner scanner = new Scanner(System.in);
+        int choiceTranslate = scanner.nextInt();
+        scanner.nextLine();  // Đọc newline character sau khi đọc số
+
+        if (choiceTranslate == 1) {
+            System.out.println("ENG --> VIE");
+            System.out.print("Nhập văn bản tiếng Anh: ");
+            String text = scanner.nextLine();
+            String translatedText = GoogleTranslateAPI.googleTranslate("en", "vi", text);
+            System.out.println("Nghĩa: " + translatedText);
+        } else if (choiceTranslate == 2) {
+            System.out.println("VIE --> ENG");
+            System.out.print("Nhập văn bản tiếng Việt: ");
+            String text = scanner.nextLine();
+            String translatedText = GoogleTranslateAPI.googleTranslate("vi", "en", text);
+            System.out.println("Translation: " + translatedText);
         } else {
-            System.out.println("Không thể đọc danh sách từ.");
+            System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn 1 hoặc 2.");
         }
     }
-
-
-
-
-
-
 }
