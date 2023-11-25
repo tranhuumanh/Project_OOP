@@ -101,6 +101,7 @@ public class DictionaryCommandLine extends Dictionary {
                     }
                     catch (IOException e){
                     }
+                    break;
 
 
                 default:
