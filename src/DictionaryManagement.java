@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class DictionaryManagement {
+public class DictionaryManagement extends Dictionary {
 
     private int size; // số lượng từ
 
