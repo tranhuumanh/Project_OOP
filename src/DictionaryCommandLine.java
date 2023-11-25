@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 public class DictionaryCommandLine extends Dictionary {
 
     public void displayMenu() {
@@ -83,7 +89,7 @@ public class DictionaryCommandLine extends Dictionary {
                     GameCommandLine();
                     break;
                 case "8":
-                    importFromFileCommandLine();
+                    ImportFromFileCommandLine();
                     break;
                 case "9":
                     ExportToFileCommandLine();
@@ -203,37 +209,36 @@ public class DictionaryCommandLine extends Dictionary {
 
     public void ExportToFileCommandLine() { // Hàm nhập ArrayList words vào file Dictionary.txt
         try {
-            if ((Dictionary.words).isEmpty()) {
+            if (Dictionary.words.isEmpty()) {
                 System.out.println("Không có dữ liệu để Export!");
                 return;
             }
 
             File file = new File("Dictionary.txt");
-            // Kiểm tra nếu file không tồn tại thì in ra thông báo
             if (!file.exists()) {
                 System.out.println("File không tồn tại!");
             }
 
-            // Tạo đối tượng FileWriter
-            FileWriter input = new FileWriter(file);
+            ArrayList<String> wordEntries = new ArrayList<>();
 
-            // Tạo đối tượng BufferedWriter để ghi dữ liệu hiệu quả hơn
-            BufferedWriter bufferedWriter = new BufferedWriter(input);
-
-            // Ghi từng phần tử của ArrayList vào file, mỗi phần tử trên một dòng
             for (Word word : Dictionary.words) {
-                bufferedWriter.write(word.getWord_target() + " " + word.getWord_explain());
-                bufferedWriter.newLine(); // Thêm dòng mới sau mỗi đối tượng
+                String entry = word.getWord_target() + " " + word.getWord_explain();
+                wordEntries.add(entry);
+            }
+            Collections.sort(wordEntries);
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (String entry : wordEntries) {
+                bufferedWriter.write(entry);
+                bufferedWriter.newLine();
             }
 
-            // Đóng các luồng
             bufferedWriter.close();
-            input.close();
+            fileWriter.close();
 
             System.out.println("Đã ghi vào file thành công.");
 
-        }
-        catch(IOException check) {
+        } catch (IOException e) {
             System.out.println("LỖI HÀM EXPORT TO FILE");
         }
     }
@@ -252,10 +257,6 @@ public class DictionaryCommandLine extends Dictionary {
         }
         System.out.println("Số kết quả đã tìm kiếm là:" + no);
     }
-    public static void main(String[] args) {
-        DictionaryCommandLine dictionaryApp = new DictionaryCommandLine();
-        dictionaryApp.dictionaryBasic();
-    }
 
     public void SoundCommandLine() {
 
@@ -266,7 +267,7 @@ public class DictionaryCommandLine extends Dictionary {
         return;
     }
 
-    public static void importFromFileCommandLine() {
+    public static void ImportFromFileCommandLine() {
         try {
             File file = new File("Dictionary.txt");
 
@@ -289,7 +290,6 @@ public class DictionaryCommandLine extends Dictionary {
                 }
             }
 
-            // Đóng các luồng
             bufferedReader.close();
             fileReader.close();
 
@@ -353,5 +353,9 @@ public class DictionaryCommandLine extends Dictionary {
         } else {
             System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn 1 hoặc 2.");
         }
+    }
+    public static void main(String[] args) {
+        DictionaryCommandLine dictionaryApp = new DictionaryCommandLine();
+        dictionaryApp.dictionaryBasic();
     }
 }

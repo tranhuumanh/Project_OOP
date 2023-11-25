@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d905d8e2-f44c-413e-a57e-8f77cc38fd72" name="Changes" comment="Update Sound">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d905d8e2-f44c-413e-a57e-8f77cc38fd72" name="Changes" comment="Update DictionaryCommandLine.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dictionary.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Dictionary.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DictionaryCommandLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DictionaryCommandLine.java" afterDir="false" />
@@ -26,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="tranhuumanh &lt;126547993+tranhuumanh@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -224,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700841046330</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Update DictionaryCommandLine.java">
+      <option name="closed" value="true" />
+      <created>1700942271769</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1700942271769</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +256,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="aaa" />
     <MESSAGE value="Update Sound" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Sound" />
+    <MESSAGE value="Update ImportFile" />
+    <MESSAGE value="Update DictionaryCommandLine.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update DictionaryCommandLine.java" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
