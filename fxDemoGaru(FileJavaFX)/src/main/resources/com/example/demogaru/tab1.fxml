@@ -24,7 +24,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Add" />
+                  <MenuItem mnemonicParsing="false" onAction="#addF" text="Add" />
                   <MenuItem mnemonicParsing="false" text="Remove" />
                   <MenuItem mnemonicParsing="false" text="Update" />
             </items>
@@ -70,7 +70,6 @@
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
-                        <Button layoutX="380.0" layoutY="200.0" mnemonicParsing="false" onAction="#Reload" prefHeight="48.0" prefWidth="71.0" text="Reload" />
                         <Label alignment="CENTER" layoutX="170.0" layoutY="69.0" prefHeight="78.0" prefWidth="233.0" text="DICTIONARY" textFill="#117cc9">
                            <font>
                               <Font name="System Bold" size="30.0" />
@@ -78,9 +77,11 @@
                         </Label>
                         <TextField fx:id="kq" alignment="CENTER" layoutX="123.0" layoutY="330.0" prefHeight="48.0" prefWidth="328.0" promptText="Nghĩa của từ ">
                            <font>
-                              <Font size="19.0" />
+                              <Font size="15.0" />
                            </font>
                         </TextField>
+                        <Button layoutX="380.0" layoutY="200.0" mnemonicParsing="false" onAction="#Sounds" prefHeight="48.0" prefWidth="75.0" text="Voice" />
+                        <Button layoutX="378.0" layoutY="330.0" mnemonicParsing="false" onAction="#Reload" prefHeight="48.0" prefWidth="75.0" text="Reload" />
                      </children>
                   </Pane>
                </children>
