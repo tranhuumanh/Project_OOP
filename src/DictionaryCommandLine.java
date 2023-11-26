@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 public class DictionaryCommandLine extends Dictionary {
+    private static final String path = "Dictionary.txt";
 
     public void displayMenu() {
         System.out.println("Welcome to My Application!");
@@ -36,11 +37,13 @@ public class DictionaryCommandLine extends Dictionary {
         }
     }
 
-    public void insertFromCommandLine() {
+    public void addWord() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập số từ: ");
         int n = scanner.nextInt();
         scanner.nextLine();
+
+        Collections.sort(Dictionary.words, (w1, w2) -> w1.getWord_target().compareTo(w2.getWord_target()));
 
         for (int i = 0; i < n; i++) {
             System.out.print("Điền từ tiếng Anh: ");
@@ -50,9 +53,16 @@ public class DictionaryCommandLine extends Dictionary {
             String vietnameseMeaning = scanner.nextLine();
 
             Word newWord = new Word(englishWord, vietnameseMeaning);
-            Dictionary.words.add(newWord);
+            int insertionIndex = binarySearch(Dictionary.words, englishWord);
 
+            if (insertionIndex < 0) {
+                // Chuyển đổi thành index chưa âm để chèn
+                insertionIndex = -(insertionIndex + 1);
+            }
+
+            Dictionary.words.add(insertionIndex, newWord);
         }
+        updateWordToFile();
         System.out.println("Word added successfully!");
     }
 
@@ -68,7 +78,7 @@ public class DictionaryCommandLine extends Dictionary {
                     System.out.println("Exiting the application. Goodbye!");
                     return;
                 case "1":
-                    insertFromCommandLine();
+                    addWord();
                     break;
                 case "2":
                     removeCommandLine();
@@ -96,6 +106,7 @@ public class DictionaryCommandLine extends Dictionary {
                     break;
                 case "10":
                     HistoryCommandLine();
+                    break;
                 case "11":
                     SoundCommandLine();
                 case "12":
@@ -118,21 +129,25 @@ public class DictionaryCommandLine extends Dictionary {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập từ cần tìm: ");
         String worded = sc.nextLine();
-        for (Word word : Dictionary.words) {
-            if ((word.getWord_target()).equals(worded)) {
 
-                (Dictionary.SaveHistoryWord).add(word.getWord_target()); //Lưu lại lịch sử tìm kiếm
+        Collections.sort(Dictionary.words, (w1, w2) -> w1.getWord_target().compareTo(w2.getWord_target()));
 
-                System.out.println(" English    | Vietnamese");
-                System.out.println("----------------------------");
+        int index = binarySearch(Dictionary.words, worded);
 
-                System.out.printf(" %-10s | %-10s%n", word.getWord_target(), word.getWord_explain());
-                return;
-            }
+        if (index >= 0 && index < Dictionary.words.size() && Dictionary.words.get(index).getWord_target().equals(worded)) {
+            Word word = Dictionary.words.get(index);
+
+            // Lưu lịch sử tìm kiếm
+            Dictionary.SaveHistoryWord.add(word.getWord_target());
+
+            System.out.println(" English    | Vietnamese");
+            System.out.println("----------------------------");
+            System.out.printf(" %-10s | %-10s%n", word.getWord_target(), word.getWord_explain());
+        } else {
+            System.out.println("Không tìm thấy từ cần tìm");
         }
-        System.out.println("Không tìm thấy từ cần tìm");
-
     }
+
 
     public void SearchCommandLine() { //Hàm tìm kiếm các từ tiếng Anh có tiền tố là
         Scanner sc = new Scanner(System.in);
@@ -143,15 +158,17 @@ public class DictionaryCommandLine extends Dictionary {
         System.out.println("----------------------------");
 
         int i = 1;
-        for (Word word : Dictionary.words) {
-            if (word.getWord_target().startsWith(worded)) {
+        int index = binarySearch(words, worded);
 
-                (Dictionary.SaveHistoryWord).add(word.getWord_target()); //Lưu lại lịch sử tìm kiếm
+        while (index < words.size() && words.get(index).getWord_target().startsWith(worded)) {
+            Word word = words.get(index);
+            SaveHistoryWord.add(word.getWord_target());
 
-                System.out.printf("%d | %-10s | %-10s%n", i, word.getWord_target(), word.getWord_explain());
-                i++;
-            }
+            System.out.printf("%d | %-10s | %-10s%n", i, word.getWord_target(), word.getWord_explain());
+            i++;
+            index++;
         }
+
         if (i == 1) {
             System.out.println("Không tìm thấy từ nào có tiền tố này");
         }
@@ -160,51 +177,53 @@ public class DictionaryCommandLine extends Dictionary {
 
     public void removeCommandLine() { // Xóa từ khỏi từ điển
         Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập từ cần xóa: ");
         String worded = sc.nextLine();
-        for (Word word : Dictionary.words) {
-            if ((word.getWord_target()).equals(worded)) {
-                Dictionary.words.remove(word);
-                System.out.println("Xóa thành công");
-                return;
-            }
 
+        int index = binarySearch(words, worded);
+        if (index != -1 && index < words.size() && words.get(index).getWord_target().equals(worded)) {
+            words.remove(index);
+            System.out.println("Xóa thành công");
+        } else {
+            System.out.println("Không tìm thấy từ cần xóa");
         }
-        System.out.println("Không tìm thấy từ cần xóa");
+        updateWordToFile();
     }
 
     public void UpdateCommandLine() { // Sửa từ
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Điền từ cần sửa: ");
+        System.out.print("Nhập từ cần sửa: ");
         String update = sc.nextLine();
 
-        for (Word word : Dictionary.words) {
+        int index = binarySearch(words, update);
+        if (index != -1 && index < words.size() && words.get(index).getWord_target().equals(update)) {
+            Word word = words.get(index);
 
-            if ((word.getWord_target()).equals(update)) {
+            System.out.println("[1] Sửa từ tiếng Anh");
+            System.out.println("[2] Sửa nghĩa của từ tiếng Anh");
+            System.out.print("Nhập lựa chọn của bạn: ");
 
-                System.out.println("[1] Sửa từ tiếng Anh");
-                System.out.println("[2] Sửa nghĩa của từ tiếng Anh");
-                System.out.print("Nhâp lựa chọn của bạn: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
 
-                int n = sc.nextInt();
-                sc.nextLine();
-
-                if (n == 1) {
-                    System.out.print("Nhập từ tiếng Anh thay thế: ");
-                    String re = sc.nextLine();
-                    word.setWord_target(re);
-                    return;
-                } else if (n == 2) {
-                    System.out.print("Nhập nghĩa của từ tiếng Anh cần sửa: ");
-                    String re = sc.nextLine();
-                    word.setWord_explain(re);
-                    return;
-                } else {
-                    System.out.println("Lựa chọn không hợp lệ!");
-                    return;
-                }
+            if (choice == 1) {
+                System.out.print("Nhập từ tiếng Anh thay thế: ");
+                String replacement = sc.nextLine();
+                word.setWord_target(replacement);
+                System.out.println("Sửa từ thành công!");
+            } else if (choice == 2) {
+                System.out.print("Nhập nghĩa mới của từ tiếng Anh: ");
+                String replacement = sc.nextLine();
+                word.setWord_explain(replacement);
+                System.out.println("Sửa nghĩa thành công!");
+            } else {
+                System.out.println("Lựa chọn không hợp lệ!");
             }
+        } else {
+            System.out.println("Không tìm thấy từ cần sửa");
         }
+        updateWordToFile();
     }
 
     public void ExportToFileCommandLine() { // Hàm nhập ArrayList words vào file Dictionary.txt
@@ -267,9 +286,9 @@ public class DictionaryCommandLine extends Dictionary {
         return;
     }
 
-    public static void ImportFromFileCommandLine() {
+    public void ImportFromFileCommandLine() {
         try {
-            File file = new File("Dictionary.txt");
+            File file = new File(path);
 
             if (!file.exists()) {
                 System.out.println("File không tồn tại!");
@@ -299,6 +318,19 @@ public class DictionaryCommandLine extends Dictionary {
             System.out.println("LỖI HÀM IMPORT FROM FILE");
         }
     }
+    public static void updateWordToFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Word word : words) {
+                bufferedWriter.write(word.getWord_target() + " " + word.getWord_explain() + "\n");
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void GameCommandLine() {
         System.out.println("[1] Nối Từ");
@@ -308,7 +340,7 @@ public class DictionaryCommandLine extends Dictionary {
         scanner.nextLine();
 
         if(choiceGame == 1){
-            String filePath = "100000Wordsforgame.txt";
+            String filePath = "10000Wordsforgame.txt";
 
             // Đọc danh sách từ vựng từ tệp
             List<String> words = NoiTuGame.readWordList(filePath);
@@ -354,8 +386,32 @@ public class DictionaryCommandLine extends Dictionary {
             System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn 1 hoặc 2.");
         }
     }
+    public static int binarySearch(ArrayList<Word> words, String target) {
+        int left = 0;
+        int right = words.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            String midWord = words.get(mid).getWord_target();
+
+            int compareResult = midWord.compareTo(target);
+
+            if (compareResult == 0) {
+                return mid;
+            } else if (compareResult < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         DictionaryCommandLine dictionaryApp = new DictionaryCommandLine();
+        dictionaryApp.ImportFromFileCommandLine();
+        Collections.sort(words, (w1, w2) -> w1.getWord_target().compareTo(w2.getWord_target()));
         dictionaryApp.dictionaryBasic();
     }
 }
