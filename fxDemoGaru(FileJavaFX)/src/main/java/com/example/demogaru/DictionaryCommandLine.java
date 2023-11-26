@@ -137,7 +137,7 @@ public class DictionaryCommandLine extends Dictionary {
             }
         }
 //        System.out.println("Không tìm thấy từ cần tìm");
-        return "Không tìm thấy từ được yêu cầu";
+        return "Không tìm thấy từ!";
     }
 
     public void SearchCommandLine() { //Hàm tìm kiếm các từ tiếng Anh có tiền tố là

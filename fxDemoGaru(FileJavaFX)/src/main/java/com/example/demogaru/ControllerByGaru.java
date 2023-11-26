@@ -70,7 +70,7 @@ public class ControllerByGaru {
     }
 
     @FXML
-    public void History(ActionEvent event) throws Exception {
+    void History(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("tabHistory.fxml"));
         Parent root = loader.load();
         Scene newScene = new Scene(root);
@@ -78,8 +78,24 @@ public class ControllerByGaru {
         stage.setScene(newScene);
         stage.show();
         StringBuilder content = new StringBuilder();
-        displayH.setText(DictionaryCommandLine.HistoryCommandLine());
+        //displayH.setText(DictionaryCommandLine.HistoryCommandLine());
     }
+
+    @FXML
+    void addF() { //Controller để thêm từ
+
+
+    }
+
+    @FXML
+    void Sounds() {
+        if (check != null) { //
+            String content = check.getText();
+            Sound.Vocal(content);
+        }
+    }
+
+
 
 
 
